@@ -15,13 +15,15 @@
   },
   "dependencies": {
     "@airgap/beacon-sdk": "^4.0.2",
+    "@completium/dapp-ts": "^0.1.9",
     "@taquito/beacon-wallet": "^16.1.2",
-    "@taquito/taquito": "^16.1.2",
+    "@taquito/taquito": "~16.0.0",
     "constate": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/node": "latest",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
