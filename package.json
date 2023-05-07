@@ -8,7 +8,8 @@
     "dev": "if [ -n \"$CODESPACES\" ]; then vite --host; else vite; fi",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-bindings": "for file in blockchain/contracts/*.arl; do completium-cli generate binding-dapp-ts $file > src/dapp_bindings/$(basename $file .arl).ts; done"
   },
   "dependencies": {
     "react": "^18.2.0",
