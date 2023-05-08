@@ -5,12 +5,6 @@ import React from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { BeaconWallet } from '@taquito/beacon-wallet'
-
-const options = {
-  name: 'MyAwesomeDapp',
-}
-const wallet = new BeaconWallet(options)
 
 function App() {
   const [count, setCount] = useState(0)
