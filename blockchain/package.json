@@ -2,7 +2,9 @@
   "name": "blockchain",
   "version": "1.0.0",
   "scripts": {
+    "bind+test": "npm run gen-binding && ./run_test.sh",
     "test": "./run_test.sh",
+
     "gen-binding": "completium-cli run binder-ts",
     "completium_init": "completium-cli init",
     "mockup_init": "completium-cli mockup init"
