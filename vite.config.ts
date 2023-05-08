@@ -13,7 +13,6 @@ export default defineConfig({
       os: 'os-browserify',
       url: 'url',
       util: 'util/', // Add an alias for the "util" module. For reasons I don't understand, without the '/' after, this throws errors
-      buffer: 'buffer',
     },
   },
   plugins: [react()],

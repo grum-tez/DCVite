@@ -1,10 +1,16 @@
 import { useState } from 'react'
-import { useTezosToolkit } from "./contexts/Taquito"
-import { useContractAddress } from "./contexts/Settings"
+import { useTezosToolkit } from './contexts/Taquito'
+import { useContractAddress } from './contexts/Settings'
 import React from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { BeaconWallet } from '@taquito/beacon-wallet'
+
+const options = {
+  name: 'MyAwesomeDapp',
+}
+const wallet = new BeaconWallet(options)
 
 function App() {
   const [count, setCount] = useState(0)
@@ -43,9 +49,7 @@ function App() {
   }, [])
 
   console.log('Contract found: ', isActualContract)
-  console.log('Add entrypoint found: ', isAddEntrypoint)
-  console.log(actualContract)
-  console.log((actualContract as any)?.entrypoints?.entrypoints?.add_poll)
+  console.log('Contract Object: ', actualContract)
 
   return (
     <>
@@ -63,7 +67,8 @@ function App() {
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and saveassdgsdfgddfsafd to tafsfsdfest HMR
+          Edit <code>src/App.tsx</code> and saveassdgsdfgddfsafd to tafsfsdfest
+          HMR
         </p>
       </div>
       <p className="read-the-docs">

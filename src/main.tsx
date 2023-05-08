@@ -6,17 +6,19 @@ import { SettingsProvider } from './contexts/Settings'
 import { TaquitoProvider } from './contexts/Taquito'
 import { BeaconProvider } from './contexts/Beacon'
 import { ContractProvider } from './contexts/Contract'
+import { Buffer } from 'buffer'
+globalThis.Buffer = Buffer
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-          <SettingsProvider>
-        <TaquitoProvider>
-          <BeaconProvider>
-            <ContractProvider>
-        <App />
-    </ContractProvider>
-          </BeaconProvider>
-        </TaquitoProvider>
-      </SettingsProvider>
-  </React.StrictMode>,
+    <SettingsProvider>
+      <TaquitoProvider>
+        <BeaconProvider>
+          <ContractProvider>
+            <App />
+          </ContractProvider>
+        </BeaconProvider>
+      </TaquitoProvider>
+    </SettingsProvider>
+  </React.StrictMode>
 )
