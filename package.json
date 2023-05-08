@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "dev": "if [ -n \"$CODESPACES\" ]; then vite --host; else vite; fi",
+    "dev-host": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -17,10 +18,20 @@
     "@airgap/beacon-sdk": "^4.0.2",
     "@completium/dapp-ts": "^0.1.9",
     "@taquito/beacon-wallet": "^16.1.2",
+    "@taquito/rpc": "^16.1.2",
     "@taquito/taquito": "~16.0.0",
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
     "constate": "^3.3.2",
+    "crypto-browserify": "^3.12.0",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.0",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@types/node": "latest",
