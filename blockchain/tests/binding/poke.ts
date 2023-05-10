@@ -39,7 +39,14 @@ export class Poke {
     async get_pokers(): Promise<Array<att.Address>> {
         if (this.address != undefined) {
             const storage = await ex.get_raw_storage(this.address);
-            return att.mich_to_list(storage, x => { return att.Address.from_mich(x); });
+            return att.mich_to_list((storage as att.Mpair).args[0], x => { return att.Address.from_mich(x); });
+        }
+        throw new Error("Contract not initialised");
+    }
+    async get_count(): Promise<att.Int> {
+        if (this.address != undefined) {
+            const storage = await ex.get_raw_storage(this.address);
+            return att.Int.from_mich((storage as att.Mpair).args[1]);
         }
         throw new Error("Contract not initialised");
     }
