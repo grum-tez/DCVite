@@ -9,3 +9,5 @@ There is also a few lines in src/main.tsx related to Buffer that are required fo
 There was a dependency clash between the most recent version of the taquito package, specifically an RPC dependency, and the @completium/dapp-ts package. dapp-ts most likely needs to be updated, but to temporarily correct this I have pinned the taquito version to the same as dapp-ts, which is v16.0.0.
 
 I have set up yarn workspaces. This seems to be required because of the 'blockchain' subfolder that includes the archetype contracts. This folder was built with the completium create project command. 
+
+I have turned off CORS in the vite.config.ts file in an attempt to get a local sandbox working. This would be a security issue if deployed.

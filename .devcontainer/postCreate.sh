@@ -9,4 +9,6 @@ sudo apt-get update -y \
 && yarn global add @completium/completium-cli \
 && completium-cli init \
 && cd blockchain \
-&& completium-cli mockup init
+&& completium-cli mockup init \ 
+&& yarn global add chokidar \
+&& sudo echo "alias cc='completium-cli'" >> /etc/bash.bashrc

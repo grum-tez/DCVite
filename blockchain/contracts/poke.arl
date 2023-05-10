@@ -1,0 +1,10 @@
+
+archetype poke
+
+variable pokers : set<address> = []
+variable count : int = 0
+
+entry poke() {
+  pokers.add(caller);
+  count := count + 1 
+} 

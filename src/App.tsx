@@ -1,19 +1,18 @@
-import { useState } from 'react'
 import { useTezosToolkit } from './contexts/Taquito'
 import { useContractAddress } from './contexts/Settings'
 import React from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import ConnectWalletButton from './ConnectButton'
+import { useContract } from './contexts/Contract'
+import PokeButton from './PokeButton'
 
 function App() {
-  const [count, setCount] = useState(0)
   const ttk = useTezosToolkit()
   const contractAddress = useContractAddress()
   const [actualContract, setActualContract] = React.useState(undefined)
   const [isActualContract, setIsActualContract] = React.useState(true)
-  const [isAddEntrypoint, setIsAddEntrypoint] = React.useState(true)
   const [loadingContract, setLoadingContract] = React.useState(true)
+  const pokeContract = useContract()
 
   React.useEffect(() => {
     console.log('mounting')
@@ -25,11 +24,9 @@ function App() {
         if (!ignore) {
           setActualContract(ctr)
           setIsActualContract(true)
-          setIsAddEntrypoint(!!(ctr as any)?.entrypoints?.entrypoints?.add_poll)
         }
       } catch (e) {
         setIsActualContract(false)
-        setIsAddEntrypoint(false)
         console.log(e)
       }
       setLoadingContract(false)
@@ -40,34 +37,25 @@ function App() {
       console.log('unmounting')
       ignore = true
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   console.log('Contract found: ', isActualContract)
   console.log('Contract Object: ', actualContract)
 
+  const callPoke = async () : Promise<void> => {
+    try {
+      await pokeContract.poke({})
+      console.log("poke succeeded")
+    }
+    catch { console.log("poke failed")}
+  }
+
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and saveassdgsdfgddfsafd to tafsfsdfest
-          HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    {loadingContract ? (<p>loading contract...</p>) : (<PokeButton onClick={callPoke} isLoading={loadingContract} />) }
+    
+      <ConnectWalletButton/>
     </>
   )
 }

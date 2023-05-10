@@ -18,7 +18,7 @@ export const [
   (v) => v.beaconState.wallet,
   (v) => v.utils.connect,
   (v) => v.utils.disconnect,
-  (v) => v.utils.is_connected
+  (v) => v.utils.isConnected
 )
 
 function MakeBeacon() {
@@ -88,9 +88,9 @@ function MakeBeacon() {
     })
   }
 
-  const is_connected = () => {
+  const isConnected = () => {
     return beaconState.user_address !== undefined
   }
 
-  return { beaconState, utils: { connect, disconnect, is_connected } }
+  return { beaconState, utils: { connect, disconnect, isConnected } }
 }

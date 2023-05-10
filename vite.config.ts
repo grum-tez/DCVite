@@ -18,9 +18,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
+    //In case of a local sandbox, you will have to
+    // cors: false
   },
   define: {
     'process.env': {},
     Buffer: [Buffer],
-  },
+  }
 })

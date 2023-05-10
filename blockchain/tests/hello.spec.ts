@@ -3,7 +3,7 @@ import {get_account, reset_experiment, set_mockup, set_mockup_now} from "@comple
 
 import { hello } from './binding/hello'
 
-const assert = require('assert')
+import assert from 'assert'
 
 /* Accounts ---------------------------------------------------------------- */
 
