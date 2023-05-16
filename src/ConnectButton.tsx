@@ -26,7 +26,7 @@ const ConnectWalletButton: React.FC = () => {
       ) : (
         <button onClick={handleClick}>Connect Wallet</button>
       )}
-      {isConnected() && <p>Connected to {walletAddress}</p>}
+      {isConnected() && <p>Address of connected wallet: {walletAddress}</p>}
     </div>
   );
 };

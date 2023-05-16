@@ -1,5 +1,6 @@
 {
   "recommendations": [
-    "edukera.archetype"
+    "edukera.archetype",
+    "ritwickdey.liveserver"
   ]
 }

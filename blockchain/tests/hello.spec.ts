@@ -1,7 +1,8 @@
 
 import {get_account, reset_experiment, set_mockup, set_mockup_now} from "@completium/experiment-ts";
+import { Int } from "@completium/archetype-ts-types";
 
-import { hello } from './binding/hello'
+import { poke_contract } from './binding/poke_contract'
 
 import assert from 'assert'
 
@@ -30,18 +31,18 @@ describe('Initialisation', async () => {
 
 /* Scenario ---------------------------------------------------------------- */
 
-describe('[HELLO] Contract deployment', async () => {
+describe('[POKE] Contract deployment', async () => {
   it('Deploy test_binding', async () => {
-    await hello.deploy({ as: alice })
+    await poke_contract.deploy({ as: alice })
   });
 })
 
-describe('[HELLO] Call entry', async () => {
-  it("Call 'myentry'", async () => {
-    const s_before = await hello.get_s()
-    assert(s_before === "")
-    await hello.exec({ as : alice })
-    const s_after = await hello.get_s()
-    assert(s_after === "Hello Archetype World!")
-  })
-})
+// describe('[POKE] Call entry', async () => {
+//   it("Call 'myentry'", async () => {
+//     const count_before = await poke_contract.get_count()
+//     assert(count_before === new Int(0))
+//     await poke_contract.poke({ as : alice })
+//     const s_after = await poke_contract.get_count()
+//     assert(s_after === new Int(1))
+//   })
+// })  

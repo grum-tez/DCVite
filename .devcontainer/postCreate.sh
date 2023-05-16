@@ -6,6 +6,7 @@ sudo apt-get update -y \
 && sudo apt-get install -y tezos-client \
 && yarn global add chokidar-cli \
 && yarn global add @completium/completium-cli \
+&& yarn global add ts-node \
 && completium-cli init \
 && cd blockchain \
 && completium-cli mockup init \

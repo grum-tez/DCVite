@@ -3,7 +3,7 @@ import * as att from "@completium/archetype-ts-types";
 const poke_arg_to_mich = (): att.Micheline => {
     return att.unit_mich;
 }
-export class Poke {
+export class Poke_contract {
     address: string | undefined;
     constructor(address: string | undefined = undefined) {
         this.address = address;
@@ -21,7 +21,7 @@ export class Poke {
         throw new Error("Contract not initialised");
     }
     async deploy(params: Partial<ex.Parameters>) {
-        const address = (await ex.deploy("./contracts/poke.arl", {}, params)).address;
+        const address = (await ex.deploy("./contracts/poke_contract.arl", {}, params)).address;
         this.address = address;
     }
     async poke(params: Partial<ex.Parameters>): Promise<att.CallResult> {
@@ -52,4 +52,4 @@ export class Poke {
     }
     errors = {};
 }
-export const poke = new Poke();
+export const poke_contract = new Poke_contract();

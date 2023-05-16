@@ -5,6 +5,9 @@ import './App.css'
 import ConnectWalletButton from './ConnectButton'
 import { useContract } from './contexts/Contract'
 import PokeButton from './PokeButton'
+import TestBar from './components/TestBar'
+
+import Box from '@mui/material/Box';
 
 function App() {
   const ttk = useTezosToolkit()
@@ -12,7 +15,8 @@ function App() {
   const [actualContract, setActualContract] = React.useState(undefined)
   const [isActualContract, setIsActualContract] = React.useState(true)
   const [loadingContract, setLoadingContract] = React.useState(true)
-  const pokeContract = useContract()
+  const pokeBinder = useContract()
+  console.log('poke contract', pokeBinder)
 
   React.useEffect(() => {
     console.log('mounting')
@@ -45,7 +49,7 @@ function App() {
 
   const callPoke = async () : Promise<void> => {
     try {
-      await pokeContract.poke({})
+      await pokeBinder.poke({})
       console.log("poke succeeded")
     }
     catch { console.log("poke failed")}
@@ -53,9 +57,13 @@ function App() {
 
   return (
     <>
-    {loadingContract ? (<p>loading contract...</p>) : (<PokeButton onClick={callPoke} isLoading={loadingContract} />) }
+        <Box sx={{ display: 'flex' }}>
+    <TestBar/>
+        {loadingContract ? (<p>loading contract...</p>) : (<PokeButton onClick={callPoke} isLoading={loadingContract} />) }
+        
     
-      <ConnectWalletButton/>
+    <ConnectWalletButton/>
+    </Box>
     </>
   )
 }

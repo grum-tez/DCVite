@@ -1,5 +1,5 @@
 
-archetype poke
+archetype poke_contract
 
 variable pokers : set<address> = []
 variable count : int = 0
@@ -7,4 +7,4 @@ variable count : int = 0
 entry poke() {
   pokers.add(caller);
   count := count + 1 
-} 
+}
