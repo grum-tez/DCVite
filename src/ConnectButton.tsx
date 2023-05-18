@@ -1,5 +1,6 @@
 import React from 'react';
 import { useConnect, useDisconnect, useIsConnected, useWalletAddress } from './contexts/Beacon'
+import { useChallengesContext } from './contexts/Challenges';
 
 const ConnectWalletButton: React.FC = () => {
   const connect = useConnect();
