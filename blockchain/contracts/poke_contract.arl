@@ -1,10 +1,7 @@
-
 archetype poke_contract
 
-variable pokers : set<address> = []
-variable count : int = 0
+variable poke_count : int = 0
 
 entry poke() {
-  pokers.add(caller);
-  count := count + 1 
+  poke_count := poke_count + 1
 }

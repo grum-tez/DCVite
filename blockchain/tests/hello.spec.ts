@@ -31,18 +31,22 @@ describe('Initialisation', async () => {
 
 /* Scenario ---------------------------------------------------------------- */
 
-describe('[POKE] Contract deployment', async () => {
+describe('[POKE_CONTRACT] Contract deployment', async () => {
   it('Deploy test_binding', async () => {
     await poke_contract.deploy({ as: alice })
   });
 })
 
-// describe('[POKE] Call entry', async () => {
-//   it("Call 'myentry'", async () => {
-//     const count_before = await poke_contract.get_count()
-//     assert(count_before === new Int(0))
-//     await poke_contract.poke({ as : alice })
-//     const s_after = await poke_contract.get_count()
-//     assert(s_after === new Int(1))
-//   })
-// })  
+describe('[POKE_CONTRACT] Test Poke Entrypoint', async () => {
+
+  it("Count increments by one", async () => {
+    const count_before = await poke_contract.get_poke_count()
+    assert(count_before.equals(new Int(0)))
+
+    await poke_contract.poke({ as : alice })
+
+    const count_after = await poke_contract.get_poke_count()
+    assert(count_after.equals(new Int(1)))
+  })
+
+})
