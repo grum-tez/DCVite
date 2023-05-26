@@ -6,13 +6,25 @@ This section describes the task to be completed.
 
 ### Walkthrough
 
-This section provides a step-by-step walkthrough of how to complete the task. Here are some example CLI commands that might be included in this section:
+This section provides a step-by-sreqwrewertep walkthrough of how to complete the task. Here are some example CLI commands that might be included in this section:
 
-``` javascript
-cd my-project npm install npm run build safasfd
+``` bash hide-run
+cd my-project 
+npm install 
+npm run build safasfd
 ```
 
-### Tests
+``` bash show-run
+cd my-asfdas 
+npm dsaf 
+npm run build asfd
+```
+
+### Tests {custom-id-name}
 
 This section
+
+@@@ youtube
+JgwnkM5WwWE
+@@@
     

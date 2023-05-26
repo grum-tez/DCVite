@@ -1,0 +1,9 @@
+{
+  "name": "dcvite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": [
+    "blockchain", "browser", "parser"
+  ]
+}
