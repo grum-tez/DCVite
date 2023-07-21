@@ -13,9 +13,9 @@
   "dependencies": {
     "@completium/archetype-ts-types": "latest",
     "@completium/completium-cli": "latest",
-    "@completium/experiment-ts": "latest"  },
+    "@completium/experiment-ts": "latest"
+  },
   "devDependencies": {
-    "@types/expect": "^24.3.0",
     "@types/mocha": "^10.0.0",
     "mocha": "^10.2.0",
     "ts-mocha": "^10.0.0"

@@ -1,8 +1,0 @@
-{
-  "name": "parser",
-  "private": true,
-  "version": "0.0.0",
-  "dependencies": {
-    "@ts-stack/markdown": "^1.4.0"
-  }
-}

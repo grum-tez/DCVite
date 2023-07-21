@@ -2,6 +2,20 @@ import { NetworkType } from '@airgap/beacon-sdk'
 import constate from 'constate'
 import { useState } from 'react'
 
+const sandboxSettings = {
+  app_name: 'My DApp',
+  endpoint: 'http://localhost:20000',
+  network: NetworkType.CUSTOM,
+  contract: 'KT1FE4Mj2XxYvu26B8GhgS6EXKqUPKbzZABi',
+}
+
+const ghostnetSettings = {
+  app_name: 'My DApp',
+  endpoint: 'https://ghostnet.tezos.marigold.dev',
+  network: NetworkType.GHOSTNET,
+  contract: 'KT1FE4Mj2XxYvu26B8GhgS6EXKqUPKbzZABi',
+}
+
 export const [
   SettingsProvider,
   useAppName,
@@ -10,12 +24,7 @@ export const [
   useContractAddress,
 ] = constate(
   () => {
-    const [settingsState] = useState({
-      app_name: 'My DApp',
-      endpoint: 'https://ghostnet.tezos.marigold.dev',
-      network: NetworkType.GHOSTNET,
-      contract: 'KT1FE4Mj2XxYvu26B8GhgS6EXKqUPKbzZABi',
-    })
+    const [settingsState] = useState(sandboxSettings)
     return settingsState
   },
   (v) => v.app_name,

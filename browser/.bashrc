@@ -1,2 +1,0 @@
-alias cc='completium-cli'
-export PATH=/usr/local/share/npm-global/bin:/usr/local/share/npm-global/bin:/vscode/vscode-server/bin/linux-arm64/252e5463d60e63238250799aef7375787f68b4ee/bin/remote-cli:/usr/local/share/nvm/current/bin:/usr/local/share/npm-global/bin:/usr/local/share/nvm/current/bin:/usr/local/share/npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/node/.local/bin
