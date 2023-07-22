@@ -18,7 +18,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    cors: false,
+    // cors: false,
     proxy: {
       '/sandbox/:path*': {
         target: 'http://localhost:20000',
@@ -27,10 +27,6 @@ export default defineConfig({
       },
     },
   },
-  // server: {
-  //   port: 3000,
-  //In case of a local sandbox, you will have to
-  // },
   define: {
     'process.env': {},
     Buffer: [Buffer],
