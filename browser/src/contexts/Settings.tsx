@@ -6,7 +6,7 @@ const sandboxSettings = {
   app_name: 'My DApp',
   endpoint: 'http://localhost:20000',
   network: NetworkType.CUSTOM,
-  contract: 'KT1X4mnH5iCxJ1HaTPBokkHBkHTV1ir7WCH7',
+  contract: 'KT1RP8DWFuR6TnXrTMMWXa5YopXrbX46GyZe',
 }
 
 const ghostnetSettings = {
