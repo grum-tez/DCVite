@@ -23,10 +23,10 @@
   // "postCreateCommand": "chmod +x .devcontainer/postCreate.sh && .devcontainer/postCreate.sh"
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [3000, 20000],
+  "forwardPorts": [3000, 20000, 5173],
   "portsAttributes": {
-    "3000": {
-      "label": "React App"
+    "5173": {
+      "label": "React/Vite App"
     },
     "20000": {
       "label": "Sandbox"
