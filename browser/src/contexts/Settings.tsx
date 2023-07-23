@@ -11,6 +11,7 @@ const sandboxSettings = {
   contract: 'KT1EgXM17ghcfrmugYwfi67yfVn5SpmXxdbQ',
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ghostnetSettings = {
   app_name: app_name,
   endpoint: 'https://ghostnet.tezos.marigold.dev',

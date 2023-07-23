@@ -1,0 +1,39 @@
+archetype rewards_contract
+
+variable reward_count : int = 0
+
+entry reward() {
+  reward_count := reward_count + 1
+}
+
+variable total_donated : tez = 0tz
+
+constant discovery_rate : rational = 0.2
+
+asset donations  {
+  id: nat;
+  donor: address;
+  amount: tez;
+}
+
+entry donate() {
+  require{
+   r1: transferred >= 1tz otherwise "MINIMUM DONATION IS 1TZ";
+  }
+  effect{
+    const this_donation_amount = transferred;
+    const discovery_amount = discovery_rate*this_donation_amount;
+    total_donated := total_donated + this_donation_amount;
+    const mystery = global_constant<map<rational, rational>>(exprurUZrQRJmBpf6c1CKs5a8FwqhnJhoWxzeP55RECRjn7CmaudAh);
+    fail(("mystery map: ", mystery));
+
+  }
+}
+
+
+asset my_asset {
+  i : nat;
+  m  : map<string, bytes>;
+} initialized with {
+  {0; []}
+}

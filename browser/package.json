@@ -10,7 +10,8 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "generate-bindings": "for file in ../blockchain/contracts/*.arl; do echo $file; echo $(basename $file .arl); completium-cli generate binding-dapp-ts $file > src/dapp_bindings/$(basename $file .arl).ts | tee; done",
-    "browser-test": "ts-mocha -n loader=ts-node/esm --project tsconfig.json test/*.spec.ts"
+    "browser-test": "ts-mocha -n loader=ts-node/esm --project tsconfig.json test/*.spec.ts",
+    "start-sandbox": "yarn --cwd start-sandbox"
   },
   "dependencies": {
     "@airgap/beacon-sdk": "^4.0.2",
@@ -36,6 +37,7 @@
     "util": "^0.12.5"
   },
   "devDependencies": {
+    "@taquito/signer": "^17.1.0",
     "@types/chai": "^4.3.5",
     "@types/expect": "^24.3.0",
     "@types/mocha": "^10.0.0",

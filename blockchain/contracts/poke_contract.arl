@@ -1,7 +1,0 @@
-archetype poke_contract
-
-variable poke_count : int = 0
-
-entry poke() {
-  poke_count := poke_count + 1
-}

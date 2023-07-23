@@ -6,5 +6,9 @@
   "workspaces": [
     "blockchain",
     "browser"
-  ]
+  ],
+  "scripts": {
+    "hello": "echo hello",
+    "start-sandbox": "docker run --rm --name my-sandbox --detach -p 20000:20000 --cpus 1 -e block_time=10 -e flextesa_node_cors_origin='*' oxheadalpha/flextesa:latest mumbaibox start"
+  }
 }

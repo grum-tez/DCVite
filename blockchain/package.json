@@ -8,7 +8,8 @@
     "watch-bind-test": "chokidar 'contracts/*.arl' 'tests/*.spec.ts' -c 'npm run bind-test'",
     "gen-binding": "completium-cli run binder-ts",
     "completium_init": "completium-cli init",
-    "mockup_init": "completium-cli mockup init"
+    "mockup_init": "completium-cli mockup init",
+    "start-sandbox": "yarn --cwd start-sandbox"
   },
   "dependencies": {
     "@completium/archetype-ts-types": "latest",
