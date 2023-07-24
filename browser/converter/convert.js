@@ -11,7 +11,7 @@ Tezos.setProvider({
 })
 
 // Load the contents of the file into a variable
-const michelineMap = JSON.parse(fs.readFileSync('map.tz', 'utf-8'))
+const michelineMap = JSON.parse(fs.readFileSync('shortmap.json', 'utf-8'))
 
 const op = await Tezos.contract.registerGlobalConstant(michelineMap)
 

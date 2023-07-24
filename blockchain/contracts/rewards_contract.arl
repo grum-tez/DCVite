@@ -10,6 +10,8 @@ variable total_donated : tez = 0tz
 
 constant discovery_rate : rational = 0.2
 
+variable donation_id_tracker : nat = 0
+
 asset donations  {
   id: nat;
   donor: address;
@@ -21,19 +23,50 @@ entry donate() {
    r1: transferred >= 1tz otherwise "MINIMUM DONATION IS 1TZ";
   }
   effect{
-    const this_donation_amount = transferred;
-    const discovery_amount = discovery_rate*this_donation_amount;
+  donation_id_tracker += 1;
+  
+  const this_donation_amount = transferred;
+    donations.add({
+      id = donation_id_tracker;
+      donor = caller ;
+      amount = this_donation_amount
+    });
+    
     total_donated := total_donated + this_donation_amount;
-    const mystery = global_constant<map<rational, rational>>(exprurUZrQRJmBpf6c1CKs5a8FwqhnJhoWxzeP55RECRjn7CmaudAh);
-    fail(("mystery map: ", mystery));
+    const discovery_fee = discovery_rate*this_donation_amount;
 
-  }
+    var last_position_rounded : rational = 0;
+    for k in donations do
+      const this_position : rational = (donations[k].amount/total_donated)*10;
+      var this_position_rounded = round_two_decimals(this_position);
+      const slice_area = pareto_cdf_slice(last_position_rounded, this_position_rounded, k=donation_id_tracker);
+      last_position_rounded := this_position_rounded ;
+      const share: tez = slice_area*discovery_fee;
+      transfer share to donations[k].donor;
+    done
+
+
+  } 
 }
 
+function round_two_decimals(target: rational): rational {
+  const target_big : rational = target*100 ;
+  const target_int: int = floor(target_big) ;
+  const target_rounded : rational = target_int / 100 ;
+  const target_simplified = simplify_rational(target_rounded);
+  return target_simplified
+}
 
-asset my_asset {
-  i : nat;
-  m  : map<string, bytes>;
-} initialized with {
-  {0; []}
+function pareto_cdf_slice(
+  last_position : rational, 
+  this_position: rational, 
+  final_slice: bool
+  ) : rational {
+    const pareto_cdf = global_constant<map<rational, rational>>(expruVX9dskEaND2rzx8CX7Thaax4fLCbhgRqtRtc2xktkabmcScwn);
+    const last_wedge: rational ?= pareto_cdf[last_position];
+    var this_wedge: rational ?= pareto_cdf[this_position];
+    if final_slice then
+      this_wedge := 1 ;
+    const slice_area: rational = this_wedge - last_wedge;
+    return slice_area   
 }

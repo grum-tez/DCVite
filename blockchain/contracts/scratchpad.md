@@ -32,3 +32,9 @@ function F(x) {
 var C = 1.06586348016531;
 return -1.06586348016531 \* Math.pow((1/(x + 1)), 1.161) + C;
 }
+
+## Creating the global constant map
+
+Ignore the file called convert.js in the browser/converter folder. This was part of an attempt to publish the global constant with taquito when I couldn't figure out how to do it with completium. Alternatively, you could use convert.js to publish the map onto ghostnet or mainnet
+
+For mockup endpoint, Use makeMap.js instead. You will have to move the generated map file into the blockchain base folder, and then uncomment the relevant lines in the test file to publish the constant to the mockup chain. Then you can update the link address to the global constant and run the tests again.

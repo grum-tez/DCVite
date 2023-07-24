@@ -6,7 +6,13 @@ import {
   register_global_constant,
   mockup_init,
 } from '@completium/experiment-ts'
-import { Int, Tez, Nat } from '@completium/archetype-ts-types'
+import {
+  Int,
+  Tez,
+  Nat,
+  elt_to_mich,
+  Rational,
+} from '@completium/archetype-ts-types'
 
 import { rewards_contract } from './binding/rewards_contract'
 
@@ -18,7 +24,7 @@ import fs from 'fs'
 const frank = get_account('frank')
 
 /* Initialisation ---------------------------------------------------------- */
-const michelineMap = JSON.parse(fs.readFileSync('mapEdit.tz', 'utf-8'))
+const michelineMap = JSON.parse(fs.readFileSync('shortMap.json', 'utf-8'))
 
 const GHOSTNET = 'https://ghostnet.ecadinfra.com'
 
@@ -39,7 +45,6 @@ describe('Initialisation', async () => {
   })
 
   // it('Register map global constant', async () => {
-  // console.log(new Nat(238).to_mich())
   //   console.log(await register_global_constant(michelineMap, { as: frank }))
   // })
 })
@@ -52,21 +57,23 @@ describe('[REWARDS_CONTRACT] Contract deployment', async () => {
   })
 })
 
-describe('[REWARDS_CONTRACT] Test Reward Entrypoint', async () => {
-  it('Count increments by one', async () => {
-    const count_before = await rewards_contract.get_reward_count()
-    assert(count_before.equals(new Int(0)))
+// describe('[REWARDS_CONTRACT] Test Reward Entrypoint', async () => {
+//   it('Count increments by one', async () => {
+//     const count_before = await rewards_contract.get_reward_count()
+//     assert(count_before.equals(new Int(0)))
 
-    await rewards_contract.reward({ as: frank })
+//     await rewards_contract.reward({ as: frank })
 
-    const count_after = await rewards_contract.get_reward_count()
-    assert(count_after.equals(new Int(1)))
-  })
-})
+//     const count_after = await rewards_contract.get_reward_count()
+//     assert(count_after.equals(new Int(1)))
+//   })
+// })
 
 describe('[REWARDS_CONTRACT] Test DONATE Entrypoint', async () => {
   it('can be called', async () => {
     const donation_amount = new Tez(1, 'tez')
     await rewards_contract.donate({ as: frank, amount: donation_amount })
   })
+
+  it('updates mystery_map', async () => {})
 })

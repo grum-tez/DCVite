@@ -1,11 +1,6 @@
 import * as ex from "@completium/experiment-ts";
 import * as att from "@completium/archetype-ts-types";
 export const donations_key_mich_type: att.MichelineType = att.prim_annot_to_mich_type("nat", []);
-export const my_asset_key_mich_type: att.MichelineType = att.prim_annot_to_mich_type("nat", []);
-export const double_key_mich_type: att.MichelineType = att.pair_array_to_mich_type([
-    att.prim_annot_to_mich_type("int", []),
-    att.prim_annot_to_mich_type("nat", [])
-], []);
 export class donations_value implements att.ArchetypeType {
     constructor(public donor: att.Address, public amount: att.Tez) { }
     toString(): string {
@@ -25,32 +20,14 @@ export const donations_value_mich_type: att.MichelineType = att.pair_array_to_mi
     att.prim_annot_to_mich_type("address", ["%donor"]),
     att.prim_annot_to_mich_type("mutez", ["%amount"])
 ], []);
-export const my_asset_value_mich_type: att.MichelineType = att.pair_annot_to_mich_type("map", att.prim_annot_to_mich_type("string", []), att.prim_annot_to_mich_type("bytes", []), []);
-export const double_value_mich_type: att.MichelineType = att.prim_annot_to_mich_type("nat", []);
 export type donations_container = Array<[
     att.Nat,
     donations_value
-]>;
-export type my_asset_container = Array<[
-    att.Nat,
-    Array<[
-        string,
-        att.Bytes
-    ]>
-]>;
-export type double_container = Array<[
-    att.Rational,
-    att.Nat
 ]>;
 export const donations_container_mich_type: att.MichelineType = att.pair_annot_to_mich_type("map", att.prim_annot_to_mich_type("nat", []), att.pair_array_to_mich_type([
     att.prim_annot_to_mich_type("address", ["%donor"]),
     att.prim_annot_to_mich_type("mutez", ["%amount"])
 ], []), []);
-export const my_asset_container_mich_type: att.MichelineType = att.pair_annot_to_mich_type("map", att.prim_annot_to_mich_type("nat", []), att.pair_annot_to_mich_type("map", att.prim_annot_to_mich_type("string", []), att.prim_annot_to_mich_type("bytes", []), []), []);
-export const double_container_mich_type: att.MichelineType = att.pair_annot_to_mich_type("map", att.pair_array_to_mich_type([
-    att.prim_annot_to_mich_type("int", []),
-    att.prim_annot_to_mich_type("nat", [])
-], []), att.prim_annot_to_mich_type("nat", []), []);
 const reward_arg_to_mich = (): att.Micheline => {
     return att.unit_mich;
 }
@@ -116,29 +93,23 @@ export class Rewards_contract {
         }
         throw new Error("Contract not initialised");
     }
+    async get_donation_id_tracker(): Promise<att.Nat> {
+        if (this.address != undefined) {
+            const storage = await ex.get_raw_storage(this.address);
+            return att.Nat.from_mich((storage as att.Mpair).args[2]);
+        }
+        throw new Error("Contract not initialised");
+    }
     async get_donations(): Promise<donations_container> {
         if (this.address != undefined) {
             const storage = await ex.get_raw_storage(this.address);
-            return att.mich_to_map((storage as att.Mpair).args[2], (x, y) => [att.Nat.from_mich(x), donations_value.from_mich(y)]);
-        }
-        throw new Error("Contract not initialised");
-    }
-    async get_my_asset(): Promise<my_asset_container> {
-        if (this.address != undefined) {
-            const storage = await ex.get_raw_storage(this.address);
-            return att.mich_to_map((storage as att.Mpair).args[3], (x, y) => [att.Nat.from_mich(x), att.mich_to_map(y, (x, y) => [att.mich_to_string(x), att.Bytes.from_mich(y)])]);
-        }
-        throw new Error("Contract not initialised");
-    }
-    async get_double(): Promise<double_container> {
-        if (this.address != undefined) {
-            const storage = await ex.get_raw_storage(this.address);
-            return att.mich_to_map((storage as att.Mpair).args[4], (x, y) => [att.Rational.from_mich(x), att.Nat.from_mich(y)]);
+            return att.mich_to_map((storage as att.Mpair).args[3], (x, y) => [att.Nat.from_mich(x), donations_value.from_mich(y)]);
         }
         throw new Error("Contract not initialised");
     }
     errors = {
-        r1: att.string_to_mich("\"MINIMUM DONATION IS 1TZ\"")
+        r1: att.string_to_mich("\"MINIMUM DONATION IS 1TZ\""),
+        OPTION_IS_NONE: att.string_to_mich("\"OPTION_IS_NONE\"")
     };
 }
 export const rewards_contract = new Rewards_contract();
