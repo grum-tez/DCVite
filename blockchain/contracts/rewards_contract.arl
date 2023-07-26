@@ -12,6 +12,8 @@ constant discovery_rate : rational = 0.2
 
 variable donation_id_tracker : nat = 0
 
+constant content_creator : address = tz1iWN1zPCv2T5cVY5sH4hoFejeD8YV2fSAf
+
 asset donations  {
   id: nat;
   donor: address;
@@ -34,6 +36,8 @@ entry donate() {
     
     total_donated := total_donated + this_donation_amount;
     const discovery_fee = discovery_rate*this_donation_amount;
+    const post_fee_donation = this_donation_amount - discovery_fee;
+    transfer post_fee_donation to content_creator ;
 
     var last_position_rounded : rational = 0;
     for k in donations do

@@ -1,11 +1,5 @@
 import fs from 'fs'
-import {
-  Int,
-  Tez,
-  Nat,
-  elt_to_mich,
-  Rational,
-} from '@completium/archetype-ts-types'
+import { elt_to_mich, Rational } from '@completium/archetype-ts-types'
 
 function F(x) {
   var C = 1.06586348016531
