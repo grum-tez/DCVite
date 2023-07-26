@@ -62,7 +62,6 @@ describe('Initialisation', async () => {
 describe('[REWARDS_CONTRACT] Contract deployment', async () => {
   it('Deploy test_binding', async () => {
     await rewards_contract.deploy({ as: frank })
-    console.log(rewards_contract.address)
   })
 })
 
@@ -82,40 +81,15 @@ describe('[REWARDS_CONTRACT] Test DONATE Entrypoint', async () => {
   it('can be called', async () => {
     const rew_con_donate = generateCall(rewards_contract, 'donate')
     const donation_amount = new Tez(5, 'tez')
-    const alice_before = await alice.get_balance()
     await rew_con_donate([], { as: alice, amount: donation_amount })
     // await rewards_contract.donate({ as: alice, amount: donation_amount })
-    const alice_after = await alice.get_balance()
-
-    console.log('alice differece: ', alice_after.minus(alice_before).toString())
   })
 })
 
 describe('Make one donation', function () {
-  before(async function () {
-    //ENTRYPOINT CALLS AND THEIR CALL PARAMETERS
-    const rewards_contract_address = rewards_contract.get_address()
-    testDataArray = await run_scenario_test(
-      //Scenario Description:
-      //A test scenario with only one entrypoint call
-      [
-        {
-          description: 'Alice donates 5tz to Frank',
-          as: alice,
-          amount: new Tez(5, 'tez'),
-          contract: rewards_contract,
-          entrypoint: 'donate',
-          args: [],
-          delay_after: 100,
-        } as CallMaker,
-      ],
-      testDataArray
-    )
-  })
-
   //LIST OF ACCOUNTS TO TEST AND EXPECTED CHANGES
-
-  let testDataArray: Array<testParams> = [
+  //Note that, unintuitively, this let statement is read *before* the "before" block further below
+  let tpArray: Array<testParams> = [
     {
       account: alice,
       description: 'alice spends 4tz',
@@ -128,11 +102,33 @@ describe('Make one donation', function () {
     } as testParams,
   ]
 
+  before(async function () {
+    //ENTRYPOINT CALLS AND THEIR CALL PARAMETERS
+    const rewards_contract_address = rewards_contract.get_address()
+    tpArray = await run_scenario_test(
+      //Scenario Description:
+      //A test scenario with only one entrypoint call
+      [
+        {
+          description: 'Alice donates 5tz to Frank',
+          as: alice,
+          amount: new Tez(5, 'tez'),
+          contract: rewards_contract,
+          entrypoint: 'donate',
+          args: [],
+          delay_after: 100,
+          cost_estimate: new Tez(0).to_big_number(),
+        } as CallMaker,
+      ],
+      tpArray //this is tpArray we assigned with let. run_scenario_test will modify it.
+    )
+  })
+
   //EXECUTE TESTS FROM ARRAY.
-  for (const tp of testDataArray) {
+  for (const tp of tpArray) {
     it(`${tp.description}`, function () {
       this.tp = tp
-      assert(tp.difference.isLessThanOrEqualTo(tp.tolerance), tp.error_message)
+      assert(tp.discrepancy.isLessThanOrEqualTo(tp.tolerance), tp.error_message)
     })
   }
 
